@@ -3,6 +3,7 @@ import { Statistics } from '../Statistics/Statistics';
 import { FeedbackOptions } from '../FeedbackOptions/FeedbackOptions';
 import { NotificationMsg } from '../NotificationMsg/NotificationMsg';
 import { Div } from './FeedbackPage.styled';
+import { Section } from '../Section/Section';
 
 class FeebbackPage extends Component {
   state = {
@@ -54,24 +55,28 @@ class FeebbackPage extends Component {
   render() {
     return (
       <Div>
-        <h2>Please leave feedback</h2>
-        <FeedbackOptions
-          updateGoodStatistics={this.updateGoodStatistics}
-          updateNeutralStatistics={this.updateNeutralStatistics}
-          updateBadStatistics={this.updateBadStatistics}
-        />
-        <h2>Statistics</h2>
-        {this.state.good > 0 || this.state.neutral > 0 || this.state.bad > 0 ? (
-          <Statistics
-            good={this.state.good}
-            neutral={this.state.neutral}
-            bad={this.state.bad}
-            total={this.state.total}
-            positivePercentage={this.state.positivePercent}
+        <Section title="Please leave feadback">
+          <FeedbackOptions
+            updateGoodStatistics={this.updateGoodStatistics}
+            updateNeutralStatistics={this.updateNeutralStatistics}
+            updateBadStatistics={this.updateBadStatistics}
           />
-        ) : (
-          <NotificationMsg message="There is no feedback" />
-        )}
+        </Section>
+        <Section title="Statistics">
+          {this.state.good > 0 ||
+          this.state.neutral > 0 ||
+          this.state.bad > 0 ? (
+            <Statistics
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              total={this.state.total}
+              positivePercentage={this.state.positivePercent}
+            />
+          ) : (
+            <NotificationMsg message="There is no feedback" />
+          )}
+        </Section>
       </Div>
     );
   }
