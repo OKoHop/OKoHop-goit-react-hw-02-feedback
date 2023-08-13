@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Statistics } from './Statistics/Statistics';
-import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
-import { NotificationMsg } from './NotificationMsg/NotificationMsg';
+import { Statistics } from '../Statistics/Statistics';
+import { FeedbackOptions } from '../FeedbackOptions/FeedbackOptions';
+import { NotificationMsg } from '../NotificationMsg/NotificationMsg';
 import { Div } from './FeedbackPage.styled';
 
 class FeebbackPage extends Component {

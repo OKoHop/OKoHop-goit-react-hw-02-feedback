@@ -1,4 +1,4 @@
-import FeebbackPage from './FeedbackPage';
+import FeebbackPage from './FeedbackPage/FeedbackPage';
 
 export const App = () => {
   return <FeebbackPage />;
