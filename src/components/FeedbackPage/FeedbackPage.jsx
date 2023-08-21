@@ -10,45 +10,23 @@ class FeebbackPage extends Component {
     good: 0,
     neutral: 0,
     bad: 0,
-    total: 0,
-  };
-
-  updateGoodStatistics = evt => {
-    this.setState(prevState => {
-      return {
-        good: prevState.good + 1,
-      };
-    }, this.countTotalFeedback);
-  };
-
-  updateNeutralStatistics = evt => {
-    this.setState(prevState => {
-      return {
-        neutral: prevState.neutral + 1,
-      };
-    }, this.countTotalFeedback);
-  };
-
-  updateBadStatistics = evt => {
-    this.setState(prevState => {
-      return {
-        bad: prevState.bad + 1,
-      };
-    }, this.countTotalFeedback);
   };
 
   countTotalFeedback = () => {
-    this.setState(
-      {
-        total: this.state.good + this.state.neutral + this.state.bad,
-      },
-      this.countPositiveFeedbackPercentage
-    );
+    let total = this.state.bad + this.state.good + this.state.neutral;
+    return total;
   };
 
   countPositiveFeedbackPercentage = () => {
-    this.setState({
-      positivePercent: Math.round((this.state.good / this.state.total) * 100),
+    const positivePecent = this.state.good / this.countTotalFeedback();
+    return Math.round(positivePecent * 100);
+  };
+
+  updateStatistics = btnName => {
+    this.setState(prevState => {
+      return {
+        [btnName]: prevState[btnName] + 1,
+      };
     });
   };
 
@@ -57,9 +35,8 @@ class FeebbackPage extends Component {
       <Div>
         <Section title="Please leave feadback">
           <FeedbackOptions
-            updateGoodStatistics={this.updateGoodStatistics}
-            updateNeutralStatistics={this.updateNeutralStatistics}
-            updateBadStatistics={this.updateBadStatistics}
+            options={Object.keys(this.state)}
+            onLeaveFeedback={this.updateStatistics}
           />
         </Section>
         <Section title="Statistics">
@@ -70,8 +47,8 @@ class FeebbackPage extends Component {
               good={this.state.good}
               neutral={this.state.neutral}
               bad={this.state.bad}
-              total={this.state.total}
-              positivePercentage={this.state.positivePercent}
+              total={this.countTotalFeedback()}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
             />
           ) : (
             <NotificationMsg message="There is no feedback" />

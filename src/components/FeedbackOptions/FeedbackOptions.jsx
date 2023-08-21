@@ -1,21 +1,20 @@
 import { Button } from './FeedbackOpt.style';
+// import { nanoid } from 'nanoid';
 
-export const FeedbackOptions = ({
-  updateGoodStatistics,
-  updateNeutralStatistics,
-  updateBadStatistics,
-}) => {
+export const FeedbackOptions = ({ onLeaveFeedback, options }) => {
   return (
     <>
-      <Button type="button" onClick={updateGoodStatistics}>
-        Good
-      </Button>
-      <Button type="button" onClick={updateNeutralStatistics}>
-        Neutral
-      </Button>
-      <Button type="button" onClick={updateBadStatistics}>
-        Bad
-      </Button>
+      {options.map(option => {
+        return (
+          <Button
+            type="button"
+            onClick={() => onLeaveFeedback(option)}
+            key={option}
+          >
+            {option}
+          </Button>
+        );
+      })}
     </>
   );
 };
